@@ -4,14 +4,14 @@ FROM eclipse-temurin:17-jdk
 # Set working directory
 WORKDIR /app
 
-# Copy all files into container
+# Copy project files
 COPY . .
 
 # Install Maven
 RUN apt-get update && apt-get install -y maven
 
-# Build the project using system Maven
-RUN mvn clean package -DskipTests
+# Build the project
+RUN ./mvnw clean package -DskipTests
 
-# Run the JAR
-CMD ["java", "-jar", "target/TradingPlatform-0.0.1-SNAPSHOT.jar"]
+# Run the jar
+CMD ["java", "-jar", "target/*.jar"]
