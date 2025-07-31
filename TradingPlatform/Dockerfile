@@ -1,17 +1,15 @@
-# Use a JDK image
 FROM eclipse-temurin:17-jdk
 
-# Set working directory
 WORKDIR /app
 
-# Copy project files
+# Copy everything (including mvnw, pom.xml, src, etc.)
 COPY . .
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven
+# Ensure the Maven Wrapper script is executable
+RUN chmod +x mvnw
 
-# Build the project
+# Build the project using the Maven wrapper
 RUN ./mvnw clean package -DskipTests
 
-# Run the jar
-CMD ["java", "-jar", "target/*.jar"]
+# Run the generated jar
+CMD ["java", "-jar", "target/TradingPlatform-0.0.1-SNAPSHOT.jar"]
