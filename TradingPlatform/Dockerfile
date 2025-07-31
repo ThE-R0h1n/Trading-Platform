@@ -9,7 +9,7 @@ COPY . .
 RUN chmod +x mvnw
 
 # Build the project using the Maven wrapper
-RUN ./mvnw clean package -DskipTests
+RUN apt-get update && apt-get install -y maven && mvn clean package -DskipTests
 
 # Run the generated jar
 CMD ["java", "-jar", "target/TradingPlatform-0.0.1-SNAPSHOT.jar"]
